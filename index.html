@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAMI Télécommande</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>PAMI Télécommande</h1>
+      <p class="subtitle">Interface de contrôle à distance</p>
+    </header>
+
+    <main>
+      <section class="controls">
+        <div class="dpad">
+          <button id="btn-up" class="dpad-btn dpad-up" aria-label="Avancer">▲</button>
+          <div class="dpad-middle-row">
+            <button id="btn-left" class="dpad-btn dpad-left" aria-label="Gauche">◀</button>
+            <button id="btn-stop" class="dpad-btn dpad-stop" aria-label="Stop">■</button>
+            <button id="btn-right" class="dpad-btn dpad-right" aria-label="Droite">▶</button>
+          </div>
+          <button id="btn-down" class="dpad-btn dpad-down" aria-label="Reculer">▼</button>
+        </div>
+
+        <div class="speed-control">
+          <label for="speed">Vitesse</label>
+          <input type="range" id="speed" min="0" max="100" value="50" />
+          <span id="speed-value">50%</span>
+        </div>
+      </section>
+
+      <section class="status">
+        <h2>État</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="status-label">Connexion</span>
+            <span id="status-connection" class="status-value status-disconnected">Déconnecté</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Commande</span>
+            <span id="status-command" class="status-value">Aucune</span>
+          </div>
+          <div class="status-item">
+            <span class="status-label">Vitesse</span>
+            <span id="status-speed" class="status-value">50%</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="log-section">
+        <h2>Journal</h2>
+        <ul id="log" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

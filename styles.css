@@ -1,0 +1,229 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Header ===== */
+header {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #58a6ff;
+  letter-spacing: 0.05em;
+}
+
+header .subtitle {
+  margin-top: 0.25rem;
+  color: #8b949e;
+  font-size: 0.95rem;
+}
+
+/* ===== Main Layout ===== */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 900px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ===== Sections ===== */
+section {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  flex: 1 1 260px;
+}
+
+section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+/* ===== D-Pad Controls ===== */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dpad-middle-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.dpad-btn {
+  width: 64px;
+  height: 64px;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background: #21262d;
+  color: #e6edf3;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+  user-select: none;
+}
+
+.dpad-btn:hover {
+  background: #30363d;
+}
+
+.dpad-btn:active,
+.dpad-btn.active {
+  background: #388bfd;
+  transform: scale(0.95);
+}
+
+.dpad-stop {
+  background: #da3633;
+  color: #fff;
+}
+
+.dpad-stop:hover {
+  background: #b62324;
+}
+
+.dpad-stop:active,
+.dpad-stop.active {
+  background: #ff6b6b;
+}
+
+/* ===== Speed Control ===== */
+.speed-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.speed-control label {
+  font-size: 0.9rem;
+  color: #8b949e;
+}
+
+.speed-control input[type="range"] {
+  width: 100%;
+  accent-color: #58a6ff;
+  cursor: pointer;
+}
+
+#speed-value {
+  font-size: 0.9rem;
+  color: #58a6ff;
+  font-weight: 600;
+}
+
+/* ===== Status Section ===== */
+.status-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #0d1117;
+  border-radius: 6px;
+  border: 1px solid #21262d;
+}
+
+.status-label {
+  color: #8b949e;
+  font-size: 0.875rem;
+}
+
+.status-value {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.status-disconnected {
+  color: #f85149;
+}
+
+.status-connected {
+  color: #3fb950;
+}
+
+/* ===== Log Section ===== */
+.log-section {
+  flex: 1 1 100%;
+}
+
+#log {
+  list-style: none;
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d #0d1117;
+}
+
+#log li {
+  padding: 0.35rem 0.75rem;
+  background: #0d1117;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #8b949e;
+  border-left: 3px solid #30363d;
+}
+
+#log li.log-command {
+  border-left-color: #58a6ff;
+  color: #e6edf3;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  .dpad-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 1.1rem;
+  }
+}
