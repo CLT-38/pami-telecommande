@@ -1,0 +1,356 @@
+/* ================================================================
+   Télécommande PAMI — styles.css
+   Cible : Chrome/Edge bureau + Android (mobile-first)
+   ================================================================ */
+
+/* ------ Variables -------------------------------------------- */
+:root {
+  --c-bg:           #1a1a2e;
+  --c-surface:      #16213e;
+  --c-header:       #3F51B5;
+  --c-connect:      #4CAF50;
+  --c-disconnect:   #F44336;
+  --c-btn-dir:      #2d2d4e;
+  --c-btn-dir-act:  #7b68ee;
+  --c-btn-anim:     #F9A825;
+  --c-btn-anim-act: #FFD600;
+  --c-log-bg:       #111;
+  --c-log-txt:      #00e676;
+  --c-text:         #e0e0e0;
+  --c-muted:        #888;
+  --c-border:       #3a3a5c;
+  --radius:         10px;
+  --gap:            14px;
+}
+
+/* ------ Reset ------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+/* ------ Body -------------------------------------------------- */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  /* Empêche la sélection de texte lors de maintiens de boutons */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ------ Page incompatible ------------------------------------- */
+#ble-unsupported {
+  max-width: 480px;
+  margin: 40px 16px;
+}
+
+.unsupported-card {
+  background: #2a0000;
+  border: 2px solid var(--c-disconnect);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.unsupported-icon { font-size: 3rem; }
+
+.unsupported-card h2 {
+  font-size: 1.3rem;
+  color: var(--c-disconnect);
+}
+
+.unsupported-card p { line-height: 1.6; font-size: 0.95rem; }
+
+.unsupported-note {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem !important;
+  color: var(--c-muted);
+}
+
+.unsupported-note code {
+  background: rgba(255,255,255,0.1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* ------ Application principale -------------------------------- */
+#app {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding-bottom: 24px;
+}
+
+/* ------ En-tête ----------------------------------------------- */
+header {
+  background: var(--c-header);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #777;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.status-dot.connected    { background: #4CAF50; box-shadow: 0 0 6px #4CAF50aa; }
+.status-dot.disconnected { background: #F44336; }
+
+/* ------ Sections ---------------------------------------------- */
+.section { padding: 0 16px; }
+
+/* ------ Sélection robot --------------------------------------- */
+.field-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--c-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#robot-select {
+  width: 100%;
+  padding: 11px 12px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  color: var(--c-text);
+  font-size: 1rem;
+  cursor: pointer;
+  appearance: auto;
+}
+
+#robot-select:focus { outline: 2px solid var(--c-header); outline-offset: 2px; }
+
+#custom-name-group { margin-top: 8px; }
+
+#custom-name {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  color: var(--c-text);
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+#custom-name::placeholder { color: #555; }
+#custom-name:focus { outline: 2px solid var(--c-header); outline-offset: 2px; }
+
+/* ------ Boutons connexion ------------------------------------- */
+.connect-row {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-connect,
+.btn-disconnect {
+  flex: 1;
+  padding: 12px 8px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+
+.btn-connect    { background: var(--c-connect);    color: #fff; }
+.btn-disconnect { background: var(--c-disconnect); color: #fff; }
+
+.btn-connect:disabled,
+.btn-disconnect:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-connect:not(:disabled):active,
+.btn-disconnect:not(:disabled):active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
+/* ------ Journal ----------------------------------------------- */
+.log-area {
+  margin: 0 16px;
+  padding: 10px 12px;
+  background: var(--c-log-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: var(--c-log-txt);
+  height: 108px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.log-area .log-line { line-height: 1.65; }
+
+/* ------ Zone contrôles --------------------------------------- */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transition: opacity 0.3s;
+}
+
+.controls[data-connected="false"] {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ------ D-Pad ------------------------------------------------- */
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: min(264px, 78vw);
+  height: min(264px, 78vw);
+}
+
+/* Positionnement explicite dans la grille */
+#btn-forward  { grid-column: 2; grid-row: 1; }
+#btn-left     { grid-column: 1; grid-row: 2; }
+.dpad-center  { grid-column: 2; grid-row: 2; }
+#btn-right    { grid-column: 3; grid-row: 2; }
+#btn-back     { grid-column: 2; grid-row: 3; }
+
+.btn-dir {
+  background: var(--c-btn-dir);
+  border: 2px solid var(--c-border);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.9rem;
+  cursor: pointer;
+  touch-action: none;       /* Empêche le scroll lors du maintien */
+  transition: background 0.08s, border-color 0.08s, transform 0.08s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-dir:not(.active):hover {
+  background: #3d3d62;
+  border-color: #7b68ee;
+}
+
+.btn-dir.active {
+  background: var(--c-btn-dir-act);
+  border-color: #a898ff;
+  transform: scale(0.92);
+}
+
+/* Noyau central du d-pad */
+.dpad-center {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: #444;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+/* ------ Bouton Animation ------------------------------------- */
+.btn-anim {
+  padding: 13px 36px;
+  background: var(--c-btn-anim);
+  border: 2px solid #c67c00;
+  border-radius: 26px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.btn-anim:not(.active):hover {
+  background: #e6901b;
+  box-shadow: 0 0 12px #f9a82555;
+}
+
+.btn-anim.active {
+  background: var(--c-btn-anim-act);
+  border-color: #FFD600;
+  color: #111;
+  box-shadow: 0 0 16px #FFD60066;
+  transform: scale(0.97);
+}
+
+/* ------ Aide clavier ----------------------------------------- */
+.keyboard-hint {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #555;
+  padding: 0 16px;
+  line-height: 1.5;
+}
+
+/* ------ Debug ------------------------------------------------ */
+.debug-text {
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--c-muted);
+  font-family: monospace;
+  padding: 0 16px 4px;
+  opacity: 0.7;
+}
+
+/* ------ Responsive desktop (> 480px) ------------------------- */
+@media (min-width: 520px) {
+  header h1 { font-size: 1.35rem; }
+  .btn-dir  { font-size: 2.1rem; }
+  .dpad {
+    width: 280px;
+    height: 280px;
+  }
+}

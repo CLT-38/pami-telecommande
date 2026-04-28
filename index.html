@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#3F51B5">
+  <title>Télécommande PAMI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==============================
+       NAVIGATEUR INCOMPATIBLE
+       ============================== -->
+  <div id="ble-unsupported" hidden>
+    <div class="unsupported-card">
+      <div class="unsupported-icon">📡</div>
+      <h2>Bluetooth non disponible</h2>
+      <p>
+        Cette page nécessite <strong>Web Bluetooth</strong>, uniquement disponible dans
+        <strong>Chrome</strong> ou <strong>Edge</strong> (bureau et Android).
+      </p>
+      <p class="unsupported-note">
+        ⚠️ <strong>iOS / Safari</strong> ne supportent pas Web Bluetooth.
+        Sur ces appareils, utilisez l'application Android (APK MIT App Inventor).
+      </p>
+      <p class="unsupported-note">
+        Si vous êtes sur Chrome/Edge et voyez ce message, vérifiez que la page est
+        ouverte en <code>https://</code> ou <code>localhost</code>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ==============================
+       APPLICATION PRINCIPALE
+       ============================== -->
+  <div id="app">
+
+    <!-- EN-TÊTE -->
+    <header>
+      <h1>Télécommande PAMI</h1>
+      <div class="status" role="status" aria-live="polite">
+        <span id="status-dot"  class="status-dot disconnected" aria-hidden="true"></span>
+        <span id="status-text">Déconnecté</span>
+      </div>
+    </header>
+
+    <!-- SÉLECTION DU ROBOT -->
+    <div class="section">
+      <label class="field-label" for="robot-select">Robot</label>
+      <select id="robot-select" aria-label="Sélectionner un robot">
+        <option value="eve">Eve de Prêt</option>
+        <option value="bobby">Bobby</option>
+        <option value="custom">Autre appareil…</option>
+      </select>
+      <div id="custom-name-group" hidden>
+        <input
+          type="text"
+          id="custom-name"
+          placeholder="Nom BLE de l'appareil (vide = scanner tous)"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Nom Bluetooth de l'appareil personnalisé"
+        >
+      </div>
+    </div>
+
+    <!-- BOUTONS CONNEXION -->
+    <div class="section connect-row">
+      <button id="connect-btn" class="btn-connect">Connecter</button>
+      <button id="disconnect-btn" class="btn-disconnect" disabled>Déconnecter</button>
+    </div>
+
+    <!-- JOURNAL -->
+    <div id="log" class="log-area" role="log" aria-live="polite" aria-label="Journal de connexion"></div>
+
+    <!-- CONTRÔLES DE MOUVEMENT -->
+    <div id="controls" class="section controls" data-connected="false">
+
+      <!-- D-PAD directionnel -->
+      <div class="dpad" role="group" aria-label="Contrôle directionnel">
+        <button id="btn-forward" class="btn-dir" aria-label="Avancer (↑)">↑</button>
+        <button id="btn-left"    class="btn-dir" aria-label="Tourner à gauche (↪)">↪</button>
+        <div    class="dpad-center" aria-hidden="true">PAMI</div>
+        <button id="btn-right"   class="btn-dir" aria-label="Tourner à droite (↩)">↩</button>
+        <button id="btn-back"    class="btn-dir" aria-label="Reculer (↓)">↓</button>
+      </div>
+
+      <!-- Bouton animation -->
+      <button id="btn-animation" class="btn-anim" aria-label="Déclencher l'animation (servo 3 s)">
+        ✨ Animation
+      </button>
+
+    </div>
+
+    <!-- AIDE CLAVIER -->
+    <div class="keyboard-hint" aria-hidden="true">
+      ⌨ Flèches du clavier supportées · Maintenir appuyé = avance en continu
+    </div>
+
+    <!-- DEBUG -->
+    <div id="debug" class="debug-text" aria-live="off">dbg:idle</div>
+
+  </div><!-- #app -->
+
+  <script src="app.js"></script>
+</body>
+</html>
